@@ -77,10 +77,11 @@ def main():
                                         productoId integer PRIMARY KEY AUTOINCREMENT,
                                         codigo text NOT NULL,
                                         nombre text NOT NULL,
-                                        marca text NOT NULL,
                                         precio real NOT NULL,
                                         stock integer NOT NULL,
                                         tipoId integer, 
+                                        marcaId integer,
+                                        FOREIGN KEY(marcaId) REFERENCES marcas(marcaId)
                                         FOREIGN KEY(tipoId) REFERENCES tipos(tipoId)
                                     ); """
 
@@ -90,6 +91,10 @@ def main():
                                         descuentoId integer NOT NULL, 
                                         FOREIGN KEY(descuentoId) REFERENCES descuentos(descuentoId)
                                     ); """
+    sql_create_marcas_table = """ CREATE TABLE IF NOT EXISTS marcas (
+                                        marcaId integer PRIMARY KEY AUTOINCREMENT,
+                                        nombre text NOT NULL,
+                                    ); """                                
 
     sql_create_descuentos_table = """ CREATE TABLE IF NOT EXISTS descuentos (
                                         descuentoId integer PRIMARY KEY AUTOINCREMENT,
