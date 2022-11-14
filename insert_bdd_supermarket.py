@@ -1,7 +1,6 @@
 import sqlite3
 from sqlite3 import Error
 
-
 def create_connection(db_file):
     """ create a database connection to the SQLite database
         specified by db_file
@@ -15,7 +14,6 @@ def create_connection(db_file):
         print(e)
 
     return conn
-
 
 def create_marcas(conn, marca):
     """
@@ -31,10 +29,6 @@ def create_marcas(conn, marca):
     conn.commit()
     return cur.lastrowid
 
-
-
-
-
 def main():
     database = r"Supermark.db"
 
@@ -42,12 +36,8 @@ def main():
     conn = create_connection(database)
     with conn:
         # create a new project
-        # producto = ("Lavandina", "X5", "19-12-2022", 300.5, 100)
-        # producto = ("Azucar", "Ledesma", "24-12-2022", 350.5, 250)
         marca = ("Pritty")
-        # producto = ("Agua Mineral", "Clarita", "20-12-2022", 200.5, 150)
         create_marcas(conn, marca)
-
 
 if __name__ == '__main__':
     main()
