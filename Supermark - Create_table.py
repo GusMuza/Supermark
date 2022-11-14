@@ -35,7 +35,7 @@ def main():
     database = r"Supermark.db"
 
     sql_create_usuarios_table = """ CREATE TABLE IF NOT EXISTS usuarios (
-                                        usuarioId integer PRIMARY KEY AUTOINCREMENT,
+                                        usuarioId INTEGER PRIMARY KEY AUTOINCREMENT,
                                         nombre text NOT NULL,
                                         apellido text NOT NULL,
                                         email text NOT NULL,
@@ -93,12 +93,12 @@ def main():
                                     ); """
     sql_create_marcas_table = """ CREATE TABLE IF NOT EXISTS marcas (
                                         marcaId integer PRIMARY KEY AUTOINCREMENT,
-                                        nombre text NOT NULL,
+                                        nombre text NOT NULL
                                     ); """                                
 
     sql_create_descuentos_table = """ CREATE TABLE IF NOT EXISTS descuentos (
-                                        descuentoId integer PRIMARY KEY AUTOINCREMENT,
-                                        porcentaje real NOT NULL
+                                        descuentoId INTEGER PRIMARY KEY AUTOINCREMENT,
+                                        porcentaje REAL NOT NULL
                                     ); """
 
     sql_create_comprobantes_table = """ CREATE TABLE IF NOT EXISTS comprobantes (
@@ -138,6 +138,7 @@ def main():
         create_table(conn, sql_create_descuentos_table)
         create_table(conn, sql_create_comprobantes_table)
         create_table(conn, sql_create_detalles_table)
+        create_table(conn, sql_create_marcas_table)
 
         # create tasks table
         # create_table(conn, sql_create_tasks_table)
@@ -147,3 +148,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+    
