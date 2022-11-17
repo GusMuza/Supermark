@@ -35,34 +35,15 @@ def main():
     database = r"Supermark.db"
 
     sql_create_usuarios_table = """ CREATE TABLE IF NOT EXISTS usuarios (
-                                        usuarioId INTEGER PRIMARY KEY AUTOINCREMENT,
+                                        usuarioId integer PRIMARY KEY AUTOINCREMENT,
                                         nombre text NOT NULL,
                                         apellido text NOT NULL,
                                         email text NOT NULL,
                                         dni integer NOT NULL,
-                                        clave text NOT NULL
+                                        clave text NOT NULL,
+                                        direccion text NOT NULL
                                     ); """
     
-    sql_create_domicilios_table = """ CREATE TABLE IF NOT EXISTS domicilios (
-                                        domicilioId integer PRIMARY KEY AUTOINCREMENT,
-                                        direccion text NOT NULL,
-                                        numero integer,
-                                        piso integer,
-                                        dpto text,
-                                        localidadId integer, 
-                                        usuarioId integer, 
-                                        FOREIGN KEY(localidadId) REFERENCES localidades(localidadId) 
-                                        FOREIGN KEY(usuarioId) REFERENCES usuarios(usuarioId)                                    
-                                    ); """
-
-    sql_create_localidades_table = """ CREATE TABLE IF NOT EXISTS localidades (
-                                        localidadId integer PRIMARY KEY AUTOINCREMENT,
-                                        provincia text NOT NULL,
-                                        departamento text NOT NULL,
-                                        ciudad text,
-                                        codpostal integer
-                                    ); """
-
     sql_create_tarjetas_table = """ CREATE TABLE IF NOT EXISTS tarjetas (
                                         tarjetaId integer PRIMARY KEY AUTOINCREMENT,
                                         numero integer NOT NULL,
@@ -77,11 +58,10 @@ def main():
                                         productoId integer PRIMARY KEY AUTOINCREMENT,
                                         codigo text NOT NULL,
                                         nombre text NOT NULL,
-                                        precio real NOT NULL,
+                                        precio float NOT NULL,
                                         stock integer NOT NULL,
                                         tipoId integer, 
-                                        marcaId integer,
-                                        FOREIGN KEY(marcaId) REFERENCES marcas(marcaId)
+                                        marca text NOT NULL,
                                         FOREIGN KEY(tipoId) REFERENCES tipos(tipoId)
                                     ); """
 
@@ -91,14 +71,10 @@ def main():
                                         descuentoId integer NOT NULL, 
                                         FOREIGN KEY(descuentoId) REFERENCES descuentos(descuentoId)
                                     ); """
-    sql_create_marcas_table = """ CREATE TABLE IF NOT EXISTS marcas (
-                                        marcaId integer PRIMARY KEY AUTOINCREMENT,
-                                        nombre text NOT NULL
-                                    ); """                                
-
+  
     sql_create_descuentos_table = """ CREATE TABLE IF NOT EXISTS descuentos (
-                                        descuentoId INTEGER PRIMARY KEY AUTOINCREMENT,
-                                        porcentaje REAL NOT NULL
+                                        descuentoId integer PRIMARY KEY AUTOINCREMENT,
+                                        porcentaje float NOT NULL
                                     ); """
 
     sql_create_comprobantes_table = """ CREATE TABLE IF NOT EXISTS comprobantes (
@@ -106,7 +82,7 @@ def main():
                                         numero integer NOT NULL,
                                         tipo text NOT NULL,
                                         fecha text NOT NULL,
-                                        total real NOT NULL,
+                                        total float NOT NULL,
                                         usuarioId integer, 
                                         tarjetaId integer,
                                         FOREIGN KEY(usuarioId) REFERENCES usuarios(usuarioId),
@@ -116,7 +92,7 @@ def main():
     sql_create_detalles_table = """ CREATE TABLE IF NOT EXISTS detalles (
                                         detalleId integer PRIMARY KEY AUTOINCREMENT,
                                         cantidad integer NOT NULL,
-                                        precio real NOT NULL,
+                                        precio float NOT NULL,
                                         productoId integer, 
                                         comprobanteId integer, 
                                         FOREIGN KEY(productoId) REFERENCES productos(productoId),
@@ -130,15 +106,13 @@ def main():
     if conn is not None:
         # create projects table
         create_table(conn, sql_create_usuarios_table)
-        create_table(conn, sql_create_domicilios_table)
-        create_table(conn, sql_create_localidades_table)
         create_table(conn, sql_create_tarjetas_table)
         create_table(conn, sql_create_productos_table)
         create_table(conn, sql_create_tipos_table)
         create_table(conn, sql_create_descuentos_table)
         create_table(conn, sql_create_comprobantes_table)
         create_table(conn, sql_create_detalles_table)
-        create_table(conn, sql_create_marcas_table)
+       
 
         # create tasks table
         # create_table(conn, sql_create_tasks_table)
