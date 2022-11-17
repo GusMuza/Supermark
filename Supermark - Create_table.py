@@ -40,13 +40,15 @@ def main():
                                         apellido text NOT NULL,
                                         email text NOT NULL,
                                         dni integer NOT NULL,
+                                        fechaNac text NOT NULL,
                                         clave text NOT NULL,
-                                        direccion text NOT NULL
+                                        direccion text NOT NULL,
+                                        tipo text NOT NULL
                                     ); """
     
     sql_create_tarjetas_table = """ CREATE TABLE IF NOT EXISTS tarjetas (
                                         tarjetaId integer PRIMARY KEY AUTOINCREMENT,
-                                        numero integer NOT NULL,
+                                        numero text NOT NULL,
                                         banco text NOT NULL,
                                         titular text NOT NULL,
                                         fechaCaducidad text NOT NULL,
@@ -79,7 +81,6 @@ def main():
 
     sql_create_comprobantes_table = """ CREATE TABLE IF NOT EXISTS comprobantes (
                                         comprobanteId integer PRIMARY KEY AUTOINCREMENT,
-                                        numero integer NOT NULL,
                                         tipo text NOT NULL,
                                         fecha text NOT NULL,
                                         total float NOT NULL,
