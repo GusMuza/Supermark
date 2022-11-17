@@ -93,8 +93,8 @@ def create_comprobantes(conn, comprobante):
     :param comprobante: list of values
     :return:
     """
-    sql = ''' INSERT INTO comprobantes(numero, tipo, fecha, total, usuarioId, tarjetaId)
-              VALUES(?,?,?,?,?,?) '''
+    sql = ''' INSERT INTO comprobantes(tipo, fecha, total, usuarioId, tarjetaId)
+              VALUES(?,?,?,?,?) '''
     cur = conn.cursor()
     cur.execute(sql, comprobante)
     conn.commit()
@@ -234,11 +234,11 @@ def insert_data(database):
     ] 
     
     comprobantes = [
-        ['00001-00000001', 'B', '2022-11-04', 5487, 3, 1 ],
-        ['00001-00000002', 'B', '2022-11-04', 8954, 4, 2 ],
-        ['00001-00000003', 'B', '2022-11-04', 12548, 5, 3 ],
-        ['00001-00000004', 'B', '2022-11-05', 87451, 6, 4 ],
-        ['00001-00000005', 'B', '2022-11-05', 97854, 7, 5 ]
+        ['B', '2022-11-04', 5487, 3, 1 ],
+        ['B', '2022-11-04', 8954, 4, 2 ],
+        ['B', '2022-11-04', 12548, 5, 3 ],
+        ['B', '2022-11-05', 87451, 6, 4 ],
+        ['B', '2022-11-05', 97854, 7, 5 ]
     ]  
 
     detalles = [
